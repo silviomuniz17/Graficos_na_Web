@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Graficos na Web</title>
+
+    <!--adicionando a referência da biblioteca, das funções que precisamos para carregá-la-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script>
+        // carregando o pacote primordial (em inglês, core) da versão mais recente do google charts
+        google.charts.load('current', {'packages': ['corechart']});
+
+        //criando a função que contém a tabela de dados e  desenha o nosso gráfico
+        function desenharPizza() {
+            //tabela com colunas, linhas e dados
+            var tabela = new google.visualization.DataTable();
+            tabela.addColumn('string', 'categorias');
+            tabela.addColumn('number', 'valores');
+            tabela.addRows([
+
+                ['Educação', 2000],
+                ['Transporte', 500],
+                ['Lazer', 230],
+                ['Saúde', 50],
+                ['Cartão de crédito', 900],
+                ['Alimentação', 260]
+            ]);
+
+            var opcoes = {
+                'title':'Tipo de Gastos',
+                'height':300,// colocando uma altura
+                'width':400, //colocando a largura
+                'pieHole':0.4 //retirando o centro do grafico para ficar parecendo uma roequinha
+            };
+
+            // instanciando um objeto do tipo gráfico de pizza ou PieChart (gráfico de torta) passando a div do html
+            var grafico = new google.visualization.PieChart(document.getElementById('graficoPizza'));
+            //passando a tabela para a função desenhar, draw que desenha o gráfico
+            grafico.draw(tabela, opcoes);
+        }
+        //usando uma função de retorno (em inglês callback) que será executada para chamar a função do nosso gráfico
+        google.charts.setOnLoadCallback(desenharPizza);
+
+    </script>
+
+</head>
+<body>
+    <!--adicionando a div para o gráfico ser exibido-->
+    <div id="graficoPizza"></div>
+</body>
+</html>
